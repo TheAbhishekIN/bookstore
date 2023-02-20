@@ -27,7 +27,7 @@ export default {
 <template>
      <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="">
+                <a class="navbar-brand">
                     Book Store {{ $store.getters.getUsername }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -49,6 +49,18 @@ export default {
                                 <li class="nav-item" v-if="!$store.getters.getUsername">
                                     <router-link class="nav-link" :to="{name: 'Login'}">Login</router-link>
                                 </li>
+                                
+                                <li class="nav-item dropdown" v-if="$store.getters.getUsername">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Book Manager
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                        <router-link class="dropdown-item" :to="{name: 'Books'}">Book</router-link>
+                                        <router-link class="dropdown-item" :to="{name: 'AddBook'}">Add Book</router-link>
+
+                                    </div>
+                                </li>
+
                             <li class="nav-item dropdown" v-if="$store.getters.getUsername">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {{ $store.getters.getUsername }}

@@ -20,7 +20,7 @@
                 </form>
             </div>
         </div>
-       
+
     </div>
 </template>
 <script>
@@ -28,7 +28,7 @@ import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex';
 export default {
-    setup(){
+    setup() {
         const router = useRouter();
         const store = useStore();
         let form = reactive({
@@ -38,16 +38,16 @@ export default {
 
         const error = ref('');
 
-        const login = async() => {
+        const login = async () => {
             await axios.post('api/login', form).then(res => {
-               if(res.data.success){
+                if (res.data.success) {
                     store.dispatch('setToken', res.data.data.token)
                     store.dispatch('setName', res.data.data.name)
 
-                    router.push({name: "Home"})
-               }else{
-                    error.value = res.data.message  
-               }
+                    router.push({ name: "Book" })
+                } else {
+                    error.value = res.data.message
+                }
             })
         }
 
