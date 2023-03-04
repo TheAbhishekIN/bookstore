@@ -1,8 +1,9 @@
 <script>
-import Paginate from 'vuejs-paginate'
+import VPagination from "@hennge/vue3-pagination";
+import "@hennge/vue3-pagination/dist/vue3-pagination.css";
 export default {
     components: {
-        Paginate
+        VPagination
     },
     data() {
         return {
@@ -15,12 +16,13 @@ export default {
             axios.get('api/books').then(res => {
                     this.books = res.data.data.data
                     this.paginationLinks = res.data.data
-                    console.log(this.paginationLinks);
             })
-        }, 
-
-        handlePagination: function(pageNum) {
-            console.log(pageNum)    
+        },
+        updatePagination(page){
+            axios.get('api/books?page='+page).then(res => {
+                    this.books = res.data.data.data
+                    this.paginationLinks = res.data.data
+            })
         }
     },
     mounted() {
@@ -52,12 +54,12 @@ export default {
                 </div>
             </div>
         </div>
-        <Paginate
-            :page-count="20"
-            :click-handler="handlePagination"
-            :prev-text="'Prev'"
-            :next-text="'Next'"
-            :container-class="'className'">
-        </Paginate>
     </div>
+    <v-pagination
+        v-model="page"
+        :pages="paginationLinks.last_page"
+        :range-size="1"
+        active-color="#FFFFFF"
+        @update:modelValue="updatePagination"
+    />
 </template>

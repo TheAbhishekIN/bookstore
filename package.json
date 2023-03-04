@@ -15,9 +15,9 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "@hennge/vue3-pagination": "^1.0.17",
         "vue-loader": "^17.0.1",
         "vue-router": "^4.0.13",
-        "vuejs-paginate": "^2.1.0",
         "vuex": "^4.0.2"
     }
 }
